@@ -28,14 +28,14 @@ Go into the user profile with the admin rights, check the URL, you'll see the em
 1. Go into the dashboard
 2. In the Devices section, click on Devices (as in screenshot)
 3. And select the last device you used to connect with your user account (it does not really matter)
-4. Check in the url, you'll see the id. Copy and paste it in the config file.
+4. Check in the url, you'll see the id. Copy and paste the value in "embyDeviceId" in the config file.
 ![image](https://user-images.githubusercontent.com/6174175/129601418-044b7076-4c96-4571-a8aa-5e0ab9fd5400.png)
 
 ## embyMusicAlbumParentId
 Here it's all about the albums with the wrong added date.
 1. From Home, go into Music library
 ![image](https://user-images.githubusercontent.com/6174175/129601648-5cf32abd-ea73-44d1-a1f5-e107b907c998.png)
-2. Once in the music library, check the url, you should see parentId. Copy and paste this value in the config file.
+2. Once in the music library, check the url, you should see parentId. Copy and paste this value in "embyMusicAlbumParentId" in the config file.
 ![image](https://user-images.githubusercontent.com/6174175/129602289-dc326142-e8ca-4d0b-a50a-51df0e248f3d.png)
 
 # Run
