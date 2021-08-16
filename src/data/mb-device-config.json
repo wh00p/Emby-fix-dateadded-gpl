@@ -1,5 +1,7 @@
 {
     "embyUserId" : "",
     "embyDeviceId" :"",
-    "embyMusicAlbumParentId" : ""
+    "embyMusicAlbumParentId" : "",
+    "embyServerHost": "",
+    "embyServerPort": 443
 }

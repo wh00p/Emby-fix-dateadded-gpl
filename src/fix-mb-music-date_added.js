@@ -27,7 +27,9 @@ const emby_device_id = configfile.embyDeviceId;
 const emby_user_id = configfile.embyUserId;
 const emby_musicalbums_parentid = configfile.embyMusicAlbumParentId;
 
-const BASE_URL = 'https://homenuc1:8920/emby/Users/' + emby_user_id;
+const serverHost = configfile.embyServerHost;
+const serverPort = configfile.embyServerPort;
+const BASE_URL = 'https://' + serverHost + ':' + serverPort;
 const step_album_list = 50;
 
 
@@ -96,15 +98,15 @@ async function main() {
             let albumDateCreatedDate = new Date(albumMetaData.DateCreated);
 
             csvLog.write(albumMetaData.Name + csvSep
-                + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + csvSep
+                + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + csvSep
                 + albumDateCreatedString + csvSep
                 + albumDateCreatedDate.toLocaleDateString() + csvSep
                 + albumDateCreatedDate.toLocaleTimeString() + csvSep
                 + albumDateCreatedDate.getTime() + csvSep
             )
 
-            console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId);
-            logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId);
+            console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId);
+            logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId);
 
             console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | dateCreated:' + albumDateCreatedString + ' | dateCreatedDate: ' + albumDateCreatedDate.toLocaleDateString() + ' ' + albumDateCreatedDate.toLocaleTimeString() + ' | timestamp: ' + albumDateCreatedDate.getTime());
             logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | dateCreated:' + albumDateCreatedString + ' | dateCreatedDate: ' + albumDateCreatedDate.toLocaleDateString() + ' ' + albumDateCreatedDate.toLocaleTimeString() + ' | timestamp: ' + albumDateCreatedDate.getTime());
@@ -210,11 +212,11 @@ async function main() {
                         + '&X-Emby-Device-Name=Chrome' + '&X-Emby-Device-Id=' + emby_device_id + '&X-Emby-Client-Version=4.6.4.0'
                         + '&X-Emby-Token=' + api_key;
 
-                    console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | Prepare change: TRUE' + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + '\n | old dateCreated:' + albumDateCreatedString + '\n | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
-                    logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | Prepare change: TRUE' + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + ' | old dateCreated:' + albumDateCreatedString + ' | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
+                    console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | Prepare change: TRUE' + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + '\n | old dateCreated:' + albumDateCreatedString + '\n | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
+                    logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | Prepare change: TRUE' + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + ' | old dateCreated:' + albumDateCreatedString + ' | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
 
-                    let respConfirmPost = await postMbMetadata(request_new_album_metadata, JSON.stringify(newAlbumMetadata), undefined, undefined);
-                    //let respConfirmPost = { statusCode: 204, statusMessage: 'No content' }; //FIXME to remove
+                    //let respConfirmPost = await postMbMetadata(request_new_album_metadata, JSON.stringify(newAlbumMetadata), undefined, undefined);
+                    let respConfirmPost = { statusCode: 204, statusMessage: 'No content' }; //FIXME to remove
 
                     csvLog.write('true' + csvSep //updated
                         + tag_bot + csvSep
@@ -223,8 +225,8 @@ async function main() {
                         + 'Changed dateAdded: ' + albumDateCreatedDate.toISOString() + ' -> ' + songDateCreatedDate.toISOString() + csvSep
                     );
 
-                    console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | CHANGED: TRUE' + ' | statusCode: ' + respConfirmPost.statusCode + ' | statusMessage: ' + respConfirmPost.statusMessage + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + '\n | old dateCreated:' + albumDateCreatedString + '\n | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
-                    logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | CHANGED: TRUE' + ' | statusCode: ' + respConfirmPost.statusCode + ' | statusMessage: ' + respConfirmPost.statusMessage + ' | link: ' + 'https://homenuc1:8920/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + ' | old dateCreated:' + albumDateCreatedString + ' | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
+                    console.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | CHANGED: TRUE' + ' | statusCode: ' + respConfirmPost.statusCode + ' | statusMessage: ' + respConfirmPost.statusMessage + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + '\n | old dateCreated:' + albumDateCreatedString + '\n | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
+                    logger.debug('[' + currentNb + '/' + maxAlbumsNb + ']' + 'albumId: ' + albumId + ' | Name: ' + albumMetaData.Name + ' | CHANGED: TRUE' + ' | statusCode: ' + respConfirmPost.statusCode + ' | statusMessage: ' + respConfirmPost.statusMessage + ' | link: ' + BASE_URL + '/web/index.html#!/item?id=' + albumId + '&serverId=' + serverId + ' | old dateCreated:' + albumDateCreatedString + ' | new dateCreated: ' + newAlbumMetadata.DateCreated + ' | tag: ' + tag_bot);
 
                 } else {
                     // not diff date - not doing anything
@@ -259,8 +261,8 @@ async function getMbData(request, nbRetry, retryDelay) {
     let data;
     const curHttpsOptions =
     {
-        hostname: 'homenuc1',
-        port: 8920,
+        hostname: serverHost,
+        port: serverPort,
         path: '/emby/Users/' + emby_user_id + '/' + request,
         method: const_api_method_get,
         headers: {
@@ -285,7 +287,7 @@ async function postMbMetadata(request, body, nbRetry, retryDelay) {
     return new Promise((resolve, reject) => {
         Request.post({
             headers: { 'content-type': 'application/json', 'Accept': '*/*', 'Connection': 'keep-alive' },
-            url: 'https://homenuc1:8920/emby/' + request,
+            url: BASE_URL + '/emby/' + request,
             rejectUnauthorized: false,
             body: body
         }, function (error, response, body) {
