@@ -2,14 +2,19 @@
 Public GPL version. Fix the albums date added using one of its songs date added.
 
 # DISCLAIMER
-I am not responsible if the script breaks at any point or fully your library. You understand the risk of using this script and you accept the risk it.
-The software is provided "as-is", you can enhance and change the code to fit your need.
-And **above all**, you should **do a backup** of your library before any operation.
+1. You understand the risk of using this script and you accept the risk it.
+2. By using this software you will not hold me (the author) responsible to any negative impact on your library.
+3. The software is provided "as-is", you can enhance and change the code to fit your need.
+4. And **above all**, you should **do a backup** of your library before any operation.
 
 # Hypothesis:
   1. The files creation date and last modified date of the files, folders and sub folders are correct and like you wanted them.
   2. The server is using SSL.
   3. You have access to emby Server with a admin user
+
+# What it does
+1. it will list all the albums, for each album it will take the first song.
+2. if the "date added" is different, it will take use the one from the song in the album and save the metadata.
   
 # Dependencies (use npm):
 1. "node": "^16.6.1",
