@@ -1,6 +1,11 @@
 # Emby-fix-dateadded-gpl
 Public GPL version. Fix the albums date added using one of its songs date added.
 
+# DISCLAIMER
+I am not responsible if the script breaks at any point or fully your library. You understand the risk of using this script and you accept the risk it.
+The software is provided "as-is", you can enhance and change the code to fit your need.
+And **above all**, you should **do a backup** of your library before any operation.
+
 # Hypothesis:
   1. The files creation date and last modified date of the files, folders and sub folders are correct and like you wanted them.
   2. The server is using SSL.
@@ -12,9 +17,10 @@ Public GPL version. Fix the albums date added using one of its songs date added.
 3. "winston": "^3.3.3",
 4. "winston-daily-rotate-file": "^4.5.5"
 
-# Configuration befor starting
-1. Configure the api key in /src/data/mb-api-token.json
-2. Configure "embyUserId", "embyDeviceId", "embyMusicAlbumParentId", "embyServerHost" and "embyServerPort" in /src/data/mb-device-config.json
+# Before starting
+1. Do a backup of your library!
+2. Configure the api key in /src/data/mb-api-token.json
+3. Configure "embyUserId", "embyDeviceId", "embyMusicAlbumParentId", "embyServerHost" and "embyServerPort" in /src/data/mb-device-config.json
 
 ## API key
 Please follow the guide here: https://github.com/MediaBrowser/Emby/wiki/Api-Key-Authentication and paste the API key in the json file.
