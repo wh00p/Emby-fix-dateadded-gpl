@@ -21,7 +21,8 @@ Please follow the guide here: https://github.com/MediaBrowser/Emby/wiki/Api-Key-
 
 ## embyUserId
 Go into the user profile with the admin rights, check the URL, you'll see the embyUserId. Copy and paste it in the config file.
-![image](https://user-images.githubusercontent.com/6174175/129600968-ec282958-555e-4c85-8fe8-ea22c8d81cce.png)
+![image](https://user-images.githubusercontent.com/6174175/129602888-fd707862-3f0a-41be-bb46-46ab1fc86a4c.png)
+
 
 ## embyDeviceId
 1. Go into the dashboard
