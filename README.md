@@ -47,7 +47,8 @@ Here it's all about the albums with the wrong added date.
 1. From Home, go into Music library
 ![image](https://user-images.githubusercontent.com/6174175/129601648-5cf32abd-ea73-44d1-a1f5-e107b907c998.png)
 2. Once in the music library, check the url, you should see parentId. Copy and paste this value in "embyMusicAlbumParentId" in the config file.
-![image](https://user-images.githubusercontent.com/6174175/129602289-dc326142-e8ca-4d0b-a50a-51df0e248f3d.png)
+![image](https://user-images.githubusercontent.com/6174175/129787441-f820c56e-76b9-47f6-aa55-cc0ce2fc04c1.png)
+
 
 # Run
 Please verify that you have the correct dependencies and the right NodeJS version.
